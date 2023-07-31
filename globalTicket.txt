@@ -1,0 +1,21 @@
+globalTicket
+
+sudo docker compose -f ./docker-compose-linux.yml up -d
+
+sudo docker compose -f ./docker-compose-linux.yml down
+
+localhost:
+http://192.168.1.117
+
+blackbox exporter --> http://192.168.1.117:9115/
+prometheus --> http://192.168.1.117:9090
+grafana --> http://192.168.1.117:3000
+opentelemetry collector health check --> http://192.168.1.117:13133/
+opentelemetry collector --> http://192.168.1.117:9200/debug/servicez
+http://192.168.1.117:15672/ (guest/guest) --> RabbitMQ web interface
+
+
+extra_hosts:
+  docker.host: 172.17.0.1
+
+./prometheus/prometheus.yml:        - http://host.docker.internal:6002/health #Basket API
